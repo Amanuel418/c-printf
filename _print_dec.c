@@ -1,58 +1,79 @@
 #include "main.h"
+
 /**
- * pd - Print decimals
- * @arg: arguments
- * Return: Number of elements of the decimal argument
- * -------------------------------------------------------------
- * Source File: _printf_dec.c - program to count decimal element
- * -------------------------------------------------------------
- * This file contains the program that counts decimal elements
- * -------------------------------------------------------------
- * Authors - Carlos Garcia - Orlando Gomez - Cohort 10 - Cali
- * Project Date - 25/10/2019 - 29/10/2019
- * ------------------------------------------------------------
- **/
-
-int pd(va_list arg)
+ * print_i - prints an integer
+ * @i: integer to print
+ *
+ * Return: number of chars and digits printed
+ */
+int print_i(va_list i)
 {
-	int n, num, ld;
-	int dig;
-	int exp, con;
-	int val = 1;
+	int a[10];
+	int j, m, n, sum, count;
 
-	n = va_arg(arg, int);
+	n = va_arg(i, int);
+	count = 0;
+	m = 1000000000;
+	a[0] = n / m;
+	for (j = 1; j < 10; j++)
+	{
+		m /= 10;
+		a[j] = (n / m) % 10;
+	}
 	if (n < 0)
-		val = -1;
-	ld = n % 10;
-	con = 1;
-	exp = 1;
-	n = n / 10;
-	num = n;
-	if (val < 0)
 	{
 		_putchar('-');
-		num = -num;
-		n = -n;
-		ld = -ld;
-		con++;
+		count++;
+		for (j = 0; j < 10; j++)
+			a[j] *= -1;
 	}
-	if (num > 0)
+	for (j = 0, sum = 0; j < 10; j++)
 	{
-		while (num / 10 != 0)
+		sum += a[j];
+		if (sum != 0 || j == 9)
 		{
-			exp = exp * 10;
-			num = num / 10;
-		}
-		num = n;
-		while (exp > 0)
-		{
-			dig = num / exp;
-			_putchar(dig  + '0');
-			num = num - (dig * exp);
-			exp = exp / 10;
-			con++;
+			_putchar('0' + a[j]);
+			count++;
 		}
 	}
-	_putchar(ld + '0');
-	return (con);
+	return (count);
+}
+
+/**
+ * print_d - prints a decimal
+ * @d: decimal to print
+ *
+ * Return: number of chars and digits printed
+ */
+int print_d(va_list d)
+{
+	int a[10];
+	int j, m, n, sum, count;
+
+	n = va_arg(d, int);
+	count = 0;
+	m = 1000000000;
+	a[0] = n / m;
+	for (j = 1; j < 10; j++)
+	{
+		m /= 10;
+		a[j] = (n / m) % 10;
+	}
+	if (n < 0)
+	{
+		_putchar('-');
+		count++;
+		for (j = 0; j < 10; j++)
+			a[j] *= -1;
+	}
+	for (j = 0, sum = 0; j < 10; j++)
+	{
+		sum += a[j];
+		if (sum != 0 || j == 9)
+		{
+			_putchar('0' + a[j]);
+			count++;
+		}
+	}
+	return (count);
 }
