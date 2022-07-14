@@ -2,47 +2,34 @@
 #define MAIN_H
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
-#include <limits.h>
 #include <unistd.h>
-
-
+#include "holberton.h"
 
 /**
- * struct format - match the conversion specifiers for printf
- * @id: type char pointer of the specifier i.e (l, h) for (d, i, u, o, x, X)
- * @f: type pointer to function for the conversion specifier
- *
+ *  * struct cformat - Short description
+ *   * @print: argument to print
+ *    * @p: Pointer
+ *     *
+ *      * Description: Basic structure of format
+ *       * -------------------------------------------------------------
+ *        * Source File: holberton.h - header file
+ *         * -------------------------------------------------------------
+ *          * This file contains the prototypes, structures and libraries
+ *           * -------------------------------------------------------------
+ *            * Authors - Carlos Garcia - Orlando Gomez - Cohort 10 - Cali
+ *             * Project Date - 25/10/2019 - 29/10/2019
+ *              * -------------------------------------------------------------
  */
-
-typedef struct format
+typedef struct cformat
 {
-	char *id;
-	int (*f)();
-} convert_match;
+	char *print;
+	int (*p)();
+} cf_t;
 
-int printf_pointer(va_list val);
-int printf_hex_aux(unsigned long int num);
-int printf_HEX_aux(unsigned int num);
-int printf_exclusive_string(va_list val);
-int printf_HEX(va_list val);
-int printf_hex(va_list val);
-int printf_oct(va_list val);
-int printf_unsigned(va_list args);
-int printf_bin(va_list val);
-int printf_srev(va_list args);
-int printf_rot13(va_list args);
-int printf_int(va_list args);
-int printf_dec(va_list args);
-int _strlen(char *s);
-int *_strcpy(char *dest, char *src);
-int _strlenc(const char *s);
-int rev_string(char *s);
-int _strlenc(const char *s);
-int printf_37(void);
-int printf_char(va_list val);
-int printf_string(va_list val);
-int _putchar(char c);
 int _printf(const char *format, ...);
-
+int _putchar(char c);
+int pc(va_list arg);
+int ps(va_list arg);
+int pd(va_list arg);
+int pi(va_list arg);
 #endif /* MAIN_H */

@@ -1,18 +1,22 @@
 #include "holberton.h"
 /**
- * _putchar - Print the parameter
- * @c: Character
- * Return: Always 0
+ * pc - Prints character c
+ * @arg: character to print
+ * Return: number of characters printed
  * -------------------------------------------------------------
- * Source File: _putchar.c - Print the character
+ * Source File: _printf_char.c - program to print character c
  * -------------------------------------------------------------
- * This file prints only one character
+ * This file contains the program that prints character c
  * -------------------------------------------------------------
  * Authors - Carlos Garcia - Orlando Gomez - Cohort 10 - Cali
  * Project Date - 25/10/2019 - 29/10/2019
  * -------------------------------------------------------------
  **/
-int _putchar(char c)
+int pc(va_list arg)
 {
-	return (write(1, &c, 1));
+	char c;
+
+	c = va_arg(arg, int);
+	_putchar(c);
+	return (1);
 }

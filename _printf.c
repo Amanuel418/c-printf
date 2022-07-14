@@ -1,45 +1,50 @@
 #include "main.h"
 /**
- * _printf - is a function that selects the correct function to print.
- * @format: identifier to look for.
- * Return: the length of the string.
- */
-int _printf(const char * const format, ...)
+ * _printf - function printf selector
+ * @format: format
+ * Return: Number of printed characters excluding the null
+ * Authors - Carlos Garcia - Orlando Gomez - Cohort 10 - Cali
+ **/
+int _printf(const char *format, ...)
 {
-	convert_match m[] = {
-		{"%s", printf_string}, {"%c", printf_char},
-		{"%%", printf_37},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
-		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
-		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
-		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
-	};
+	int con1 = 0, con2 = 0, flag, lon = 0;
+	va_list arg;
 
-	va_list args;
-	int i = 0, j, len = 0;
+	cf_t print[] = { {"c", pc}, {"s", ps}, {"d", pd}, {"i", pi}, {NULL, NULL} };
 
-	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-
-Here:
-	while (format[i] != '\0')
+	va_start(arg, format);
+	while (format[con1] != '\0')
 	{
-		j = 13;
-		while (j >= 0)
+		if (format[con1] == '%' && format[con1 + 1] != '%')
 		{
-			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
+			con2 = 0;
+			flag = 0;
+			while (print[con2].p != NULL)
 			{
-				len += m[j].f(args);
-				i = i + 2;
-				goto Here;
+				if (format[con1 + 1] == print[con2].print[0])
+				{
+					lon = lon + print[con2].p(arg);
+					flag = 1;
+					con1++; }
+				con2++;
 			}
-			j--;
+			if (flag == 0)
+			{
+				_putchar (format[con1]);
+				lon = lon + 1; }
 		}
-		_putchar(format[i]);
-		len++;
-		i++;
-	}
-	va_end(args);
-	return (len);
+		else if (format[con1] == '%' && format[con1 + 1] == '%')
+		{
+			_putchar ('%');
+			con1++;
+			lon = lon + 1; }
+		else
+		{
+			_putchar (format[con1]);
+			lon = lon + 1; }
+		con1++;	}
+	va_end(arg);
+	return (lon);
 }
